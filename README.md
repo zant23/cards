@@ -1,3 +1,3 @@
 # cards
 
-A small Flutter small Project using Provider and SQLite.
+A small Flutter demonstration Project using Provider and SQLite.
