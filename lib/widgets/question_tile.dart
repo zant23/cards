@@ -35,13 +35,7 @@ class QuestionTile extends StatelessWidget {
               question: question,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: Text(
-              'next at: ${question.learnableFrom.day}.${question.learnableFrom.month}.${question.learnableFrom.year}',
-              style: TextStyle(color: Colors.grey[500], fontSize: 12),
-            ),
-          )
+          _QuestionTileFooter(question: question)
         ],
       ),
     );
@@ -102,22 +96,12 @@ class _QuestionTileFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text(
-          'This card can be learned at: ${question.learnableFrom.day}.${question.learnableFrom.month}',
-          style: TextStyle(color: Colors.grey[500], fontSize: 12),
-        ),
-        Text(
-          '| ',
-          style: TextStyle(color: Colors.grey[500]),
-        ),
-        Text(
-          'You have answered: ${question.wasCorrectCount}',
-          style: TextStyle(color: Colors.grey[500], fontSize: 12),
-        ),
-      ],
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      child: Text(
+        'next at: ${question.learnableFrom.day}.${question.learnableFrom.month}.${question.learnableFrom.year}',
+        style: TextStyle(color: Colors.grey[500], fontSize: 12),
+      ),
     );
   }
 }

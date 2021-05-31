@@ -13,7 +13,6 @@ class QuestionOverviewScreen extends StatefulWidget {
 }
 
 class _QuestionOverviewScreenState extends State<QuestionOverviewScreen> {
-  String query = '';
   void showAddQuestionOverlay(BuildContext context) {
     showModalBottomSheet(
         isScrollControlled: true,
@@ -35,17 +34,18 @@ class _QuestionOverviewScreenState extends State<QuestionOverviewScreen> {
             _AppBarMenu()
           ],
         ),
-        body: FilterableQuestionList(),
-        bottomSheet: SizedBox(
-          width: double.infinity,
-          height: 60,
-          child: ElevatedButton(
-              style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(2))))),
-              onPressed: () => showAddQuestionOverlay(context),
-              child: Text('New Card')),
+        body: FilterableQuestionList(
+          trailing: SizedBox(
+            width: double.infinity,
+            height: 60,
+            child: ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(2))))),
+                onPressed: () => showAddQuestionOverlay(context),
+                child: Text('New Card')),
+          ),
         ));
   }
 }

@@ -6,7 +6,8 @@ import 'package:loading_overlay/loading_overlay.dart';
 import 'package:provider/provider.dart';
 
 class FilterableQuestionList extends StatefulWidget {
-  const FilterableQuestionList({Key? key}) : super(key: key);
+  final Widget? trailing;
+  const FilterableQuestionList({Key? key, this.trailing}) : super(key: key);
 
   @override
   _FilterableQuestionListState createState() => _FilterableQuestionListState();
@@ -15,14 +16,7 @@ class FilterableQuestionList extends StatefulWidget {
 class _FilterableQuestionListState extends State<FilterableQuestionList> {
   String query = '';
 
-  bool questionMatchesQuery(Question question) {
-    if (query.isEmpty) return true;
-    if (question.side1.toLowerCase().contains(query.toLowerCase())) return true;
-    if (question.side2.toLowerCase().contains(query.toLowerCase())) return true;
-    return false;
-  }
-
-  void updateQuery(String newQuery) {
+  void updateQuery(String newQuery) async {
     setState(() {
       query = newQuery;
     });
@@ -33,7 +27,7 @@ class _FilterableQuestionListState extends State<FilterableQuestionList> {
     return Consumer<QuestionProvider>(
       builder: (context, questionProvider, child) {
         List<Question> filteredQuestions =
-            questionProvider.questions.where(questionMatchesQuery).toList();
+            questionProvider.filtered(query: query);
 
         return LoadingOverlay(
             isLoading: !questionProvider.isReady,
@@ -47,6 +41,7 @@ class _FilterableQuestionListState extends State<FilterableQuestionList> {
                     itemCount: filteredQuestions.length,
                   ),
                 ),
+                if (widget.trailing != null) widget.trailing!
               ],
             ));
       },

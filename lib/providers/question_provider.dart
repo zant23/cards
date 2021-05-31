@@ -15,9 +15,11 @@ class QuestionProvider with ChangeNotifier {
   List<Question> get learnableQuestions => questions
       .where((question) => question.learnableFrom.isBefore(DateTime.now()))
       .toList();
+  List<Question> filtered({required String query}) =>
+      QuestionService.filterLocally(questions, query: query);
 
   Future<void> _init() async {
-    List<Question> questions = await QuestionService.questions;
+    List<Question> questions = await QuestionService.all();
     _questions.addAll(questions);
     _isReady = true;
 

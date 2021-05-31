@@ -1,6 +1,6 @@
 import 'package:cards/models/models.dart';
 import 'package:cards/providers/providers.dart';
-import 'package:flip_card/flip_card.dart';
+import 'package:cards/widgets/learning_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +33,7 @@ class LearningScreen extends StatelessWidget {
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 100),
             child: currentQuestion != null
-                ? _QuestionCard(
+                ? LearningCard(
                     side1: currentQuestion.side1, side2: currentQuestion.side2)
                 : Center(
                     child: Text('Congratulations! You have learned it all.'),
@@ -48,32 +48,6 @@ class LearningScreen extends StatelessWidget {
               : SizedBox.shrink(),
         );
       },
-    );
-  }
-}
-
-class _QuestionCard extends StatelessWidget {
-  final String side1;
-  final String side2;
-  _QuestionCard({Key? key, required this.side1, required this.side2})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return FlipCard(
-      key: UniqueKey(),
-      front: Card(
-        color: Colors.grey[300],
-        child: Center(
-            child: Text(side1,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-      ),
-      back: Card(
-        color: Colors.grey[300],
-        child: Center(
-            child: Text(side2,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
-      ),
     );
   }
 }
