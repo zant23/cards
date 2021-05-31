@@ -1,5 +1,7 @@
 import 'dart:math';
 
+import 'package:flutter/material.dart';
+
 class Question {
   final int? id;
   final String side1;
@@ -19,7 +21,8 @@ class Question {
 
   Question({required this.side1, required this.side2})
       : id = null,
-        lastLearned = DateTime.now().subtract(Duration(days: 1)),
+        lastLearned =
+            DateUtils.dateOnly(DateTime.now().subtract(Duration(days: 1))),
         wasCorrectCount = 0;
 
   static Question fromMap(Map map) {

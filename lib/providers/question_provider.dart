@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:cards/models/question.dart';
-import 'package:cards/services/question_service.dart';
+import 'package:cards/services/services.dart';
 import 'package:flutter/material.dart';
 
 const maxCorrectCount = 40;
@@ -30,7 +30,7 @@ class QuestionProvider with ChangeNotifier {
 
   Future<void> isCorrectAnswered(Question question) async {
     Question newQuestion = question.copyWith(
-        lastLearned: DateTime.now(),
+        lastLearned: DateUtils.dateOnly(DateTime.now()),
         wasCorrectCount: min(question.wasCorrectCount + 1, maxCorrectCount));
 
     await QuestionService.update(newQuestion);
@@ -43,9 +43,8 @@ class QuestionProvider with ChangeNotifier {
   }
 
   Future<void> isWrongAnswered(Question question) async {
-    print('answered wrong');
     Question newQuestion = question.copyWith(
-        lastLearned: DateTime.now(),
+        lastLearned: DateUtils.dateOnly(DateTime.now()),
         wasCorrectCount: max(question.wasCorrectCount - 1, 0));
 
     await QuestionService.update(newQuestion);
